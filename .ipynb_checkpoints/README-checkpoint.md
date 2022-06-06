@@ -5,11 +5,8 @@
 
 
 ## Description
-
 Identifying and quantifying functional group exchange relationships from matched pair analysis that lead to efflux substrates / defining chemical space of effux pumps
 
 ------------------
-
-
 
 
