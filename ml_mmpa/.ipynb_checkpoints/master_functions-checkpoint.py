@@ -808,6 +808,7 @@ def results_arr_dev(features_all, fr_sig_descriptors, r_feats, l_feats , fractio
             
           
             delta_p_p = round(features_all.iloc[name_loss.index].target.mean(), 2)
+            
             percentage_loss = [round(name_loss[x].sum() / len(name_loss) *100, 2 ) for x in big_gain[:10]]
 
 
@@ -1089,16 +1090,18 @@ def calculate_fractions_mk5(df):
             mol_target_left.UpdatePropertyCache()
             mol_target_left = Chem.AddHs(mol_target_left)
             Chem.SanitizeMol(mol_target_left)
-        except TypeError:
-            print('Error: ', index, target)
+            
+        except Chem.KekulizeException:
+            print('Error: ', index, df.LHS.values)
 
         try:
             mol_target_right=Chem.MolFromSmarts(df.RHS.values[index])
             mol_target_right.UpdatePropertyCache()
             mol_target_right = Chem.AddHs(mol_target_right)
             Chem.SanitizeMol(mol_target_right)
-        except TypeError:
-            print('Error: ', index, target)    
+            
+        except Chem.KekulizeException:
+            print('Error: ', index, df.RHS.values)    
 
         if type(mol_target_right) != Chem.rdchem.Mol or type(mol_target_left) != Chem.rdchem.Mol:
 
